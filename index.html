@@ -1,0 +1,61 @@
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <h1>Welcome to the canteen! Here are our street foods menu.</h1>
+        <h2>Prices are shown below. Click finalize order once you're sure with your orders</h2>
+        <ul>
+            <li> Burger - 60 </li>
+            <li> Kikiam - 12 pesos / 3pcs large </li>
+        </ul>
+        <button name="addFood">Add a food Item</button>
+        <p>Choice</p>
+        <div id="food-items-container"></div>
+            <select name="food" id="food">
+                <option value="burger">Burger</option>
+                <option value="kikiam">Kikiam</option>
+            </select>
+            <br><br>
+            <label for="quantity">Quantity</label><br>
+            <input type="number" id="quantity" name="quantity"><br>
+                <br>
+                <button type="submit" value="Finalize Order" onclick="orderFinalized()">Finalize Order</button> 
+                <script> function orderFinalized() {
+                    const foodItems = document.querySelectorAll('[name="food"]');
+                    let total = 0;
+                    foodItems.forEach(foodItem => {
+                      const foodValue = foodItem.value;
+                      const quantityValue = foodItem.parentElement.querySelector('[name="quantity"]').value;
+                      const quantity = parseInt(quantityValue);
+                      if (foodValue === "burger") {
+                        total += 60 * quantity;
+                      } else if (foodValue === "kikiam") {
+                        total += 12 * quantity;
+                      }
+                    });
+                    alert(`Order Finalized: Total = ${total}`);
+                  }</script>
+                
+            <br><p>Cash</p>
+            <input type="number" id="cash" name="cash"><br>
+            <input type="submit" value="pay" onclick="pay()"> <script> function pay() {
+                const cash = document.getElementById("cash").value;
+                const foodItems = document.querySelectorAll('[name="food"]');
+                let total = 0;
+                foodItems.forEach(foodItem => {
+                  const foodValue = foodItem.value;
+                  const quantityValue = foodItem.parentElement.querySelector('[name="quantity"]').value;
+                  const quantity = parseInt(quantityValue);
+                  if (foodValue === "burger") {
+                    total += 60 * quantity;
+                  } else if (foodValue === "kikiam") {
+                    total += 12 * quantity;
+                  }
+                });
+                const change = cash - total;
+                alert(`Change: ${change}`);
+              } </script>
+                <script src="script.js"></script>
+    </body>
+</html>
